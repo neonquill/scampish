@@ -3,6 +3,7 @@ var common = require('common');
 
 require('valid-input.tag');
 require('loading.tag');
+require('editor.tag');
 
 //
 // Arguments:
@@ -60,6 +61,8 @@ require('loading.tag');
                       class="col-md-12 form-control"
                       rows="20">
             </textarea>
+            <editor content="{ page.content }">
+            </editor>
           </div>
         </div>
       </fieldset>

@@ -7,6 +7,7 @@ define(function(require) {
       matter = require('gray-matter-browser'),
       yaml = require('js-yaml'),
       MarkdownIt = require('markdown-it'),
+      mi_replace_link = require('markdown-it-replace-link'),
       myAWS = require('my-aws');
 
   var AwsCache = {
@@ -363,6 +364,16 @@ define(function(require) {
           return data;
         });
     };
+
+    // Get a signed URL for an object.
+    this.get_signed_url = function(path) {
+      var params = {
+        Bucket: this.bucket,
+        Key: path
+      };
+
+      return myAWS.s3.getSignedUrl('getObject', params);
+    };
   }
 
   // Global AWS state object.
@@ -504,8 +515,6 @@ define(function(require) {
     riot.observable(this);
 
     var self = this;
-
-    var md = new MarkdownIt();
 
     // Once we've logged in, we can create real objects.
     self.on('aws_login', function() {
@@ -781,6 +790,19 @@ define(function(require) {
           self.trigger('file_uploaded', path, file);
         });
     });
+
+    // Code to replace links with signed urls.
+    self.md_replace_link = function(link, env) {
+      var absolute = new RegExp('^(?:[a-z]+:)?//', 'i');
+      if (absolute.test(link)) {
+        return link;
+      }
+      return env.site.get_signed_url(env.path + link);
+    };
+
+    var md = new MarkdownIt({
+      replaceLink: self.md_replace_link
+    }).use(mi_replace_link);
 
     // Convert markdown text to html.
     self.on('render_markdown', function(site_slug, path, text) {

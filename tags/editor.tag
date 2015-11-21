@@ -19,6 +19,10 @@ var RiotControl = require('riotcontrol');
     </div>
   </div>
 
+  <style>
+   editor img { max-width: 100% }
+  </style>
+
   <script>
    this.on('mount', function() {
      RiotControl.trigger('render_markdown', opts.site, opts.path,

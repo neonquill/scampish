@@ -16,6 +16,7 @@
     "webpack-stream": "^2.1.1"
   },
   "dependencies": {
-    "json-loader": "^0.5.3"
+    "json-loader": "^0.5.3",
+    "markdown-it": "^5.0.2"
   }
 }

@@ -1,4 +1,5 @@
-var ProseMirror = require("prosemirror/dist/edit").ProseMirror
+var ProseMirror = require('prosemirror/dist/edit').ProseMirror
+require('prosemirror/dist/parse/markdown');
 
 <editor>
   <div id="editor"></div>
@@ -8,7 +9,7 @@ var ProseMirror = require("prosemirror/dist/edit").ProseMirror
      var editor = new ProseMirror({
        place: this.root.querySelector("#editor"),
        doc: opts.content,
-       docFormat: "text"
+       docFormat: "markdown"
      });
    });
   </script>

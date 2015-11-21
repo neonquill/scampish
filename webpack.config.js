@@ -11,6 +11,9 @@ module.exports = {
     })
   ],
   module: {
+    loaders: [
+      { test: /\.json$/, loader: "json" }
+    ],
     preLoaders: [
       { test: /\.tag$/, exclude: /node_modules/, loader: 'riotjs-loader',
         query: { type: 'none' } }

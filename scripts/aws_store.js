@@ -6,6 +6,7 @@ define(function(require) {
       Promise = require('bluebird'),
       matter = require('gray-matter-browser'),
       yaml = require('js-yaml'),
+      MarkdownIt = require('markdown-it'),
       myAWS = require('my-aws');
 
   var AwsCache = {
@@ -504,6 +505,8 @@ define(function(require) {
 
     var self = this;
 
+    var md = new MarkdownIt();
+
     // Once we've logged in, we can create real objects.
     self.on('aws_login', function() {
       myAWS.login();
@@ -778,6 +781,18 @@ define(function(require) {
           self.trigger('file_uploaded', path, file);
         });
     });
+
+    // Convert markdown text to html.
+    self.on('render_markdown', function(site_slug, path, text) {
+      AwsState.get_site(site_slug)
+      .then(function(site) {
+        return md.render(text, {site: site, path: 'src/' + path});
+      })
+      .then(function(html) {
+        self.trigger('markdown_rendered', html);
+      });
+    });
+
   }
 
   return AwsStore;

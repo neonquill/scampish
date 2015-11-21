@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "json-loader": "^0.5.3",
-    "markdown-it": "^5.0.2"
+    "markdown-it": "^5.0.2",
   }
 }

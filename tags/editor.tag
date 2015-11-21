@@ -1,4 +1,4 @@
-var MarkdownIt = require('markdown-it');
+var RiotControl = require('riotcontrol');
 
 <editor>
   <div class="form-group">
@@ -20,16 +20,24 @@ var MarkdownIt = require('markdown-it');
   </div>
 
   <script>
-   var md = new MarkdownIt();
-
    this.on('mount', function() {
-     var result = md.render(opts.content || "");
-     this.preview.innerHTML = result;
+     RiotControl.trigger('render_markdown', opts.site, opts.path,
+                         opts.content || "");
+   });
+
+   this.on('unmount', function() {
+     RiotControl.off('markdown_rendered', this.on_markdown_rendered);
    });
 
    this.change = function(e) {
-     var result = md.render(this.content.value || "");
-     this.preview.innerHTML = result;
+     RiotControl.trigger('render_markdown', opts.site, opts.path,
+                         this.content.value || "");
    };
+
+   this.on_markdown_rendered = function(html) {
+     this.preview.innerHTML = html;
+   }.bind(this);
+
+   RiotControl.on('markdown_rendered', this.on_markdown_rendered);
   </script>
 </editor>

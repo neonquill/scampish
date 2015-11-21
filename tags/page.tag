@@ -53,7 +53,9 @@ require('editor.tag');
                      value="{ page.layout }"
                      help="Page template version (usually 'post').">
         </valid-input>
-        <editor content="{ page.content }">
+        <editor site="{ opts.site }"
+                path="{ opts.page_path }"
+                content="{ page.content }">
         </editor>
       </fieldset>
       <div class="form-group">

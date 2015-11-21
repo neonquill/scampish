@@ -7,7 +7,8 @@ var MarkdownIt = require('markdown-it');
       <textarea name="content"
                 value="{ opts.content }"
                 class="form-control"
-                rows="20">
+                rows="20"
+                oninput="{ change }">
       </textarea>
     </div>
     <div class="col-lg-5">
@@ -21,10 +22,14 @@ var MarkdownIt = require('markdown-it');
   <script>
    var md = new MarkdownIt();
 
-   this.on('update', function() {
+   this.on('mount', function() {
      var result = md.render(opts.content || "");
-     console.log("XXX", result);
      this.preview.innerHTML = result;
    });
+
+   this.change = function(e) {
+     var result = md.render(this.content.value || "");
+     this.preview.innerHTML = result;
+   };
   </script>
 </editor>

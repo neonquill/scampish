@@ -367,12 +367,20 @@ define(function(require) {
 
     // Get a signed URL for an object.
     this.get_signed_url = function(path) {
+      var cache_path = 'link/' + this.bucket + '/' + path;
+      var value = AwsCache.get(cache_path);
+      if (typeof value !== 'undefined') {
+        return value;
+      }
+
       var params = {
         Bucket: this.bucket,
         Key: path
       };
 
-      return myAWS.s3.getSignedUrl('getObject', params);
+      value = myAWS.s3.getSignedUrl('getObject', params);
+      AwsCache.save(cache_path, value);
+      return value;
     };
   }
 

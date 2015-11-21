@@ -1,5 +1,7 @@
 var RiotControl = require('riotcontrol');
 
+require('editor-help.tag');
+
 <editor>
   <div class="form-group">
     <label class="col-sm-2 control-label" for="content">Content:</label>
@@ -10,6 +12,7 @@ var RiotControl = require('riotcontrol');
                 rows="20"
                 oninput="{ change }">
       </textarea>
+      <editor-help></editor-help>
     </div>
     <div class="col-lg-5">
       <div class="panel panel-default">

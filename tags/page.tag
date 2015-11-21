@@ -53,13 +53,8 @@ require('editor.tag');
                      value="{ page.layout }"
                      help="Page template version (usually 'post').">
         </valid-input>
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="content">Content:</label>
-          <div class="col-sm-10">
-            <editor content="{ page.content }">
-            </editor>
-          </div>
-        </div>
+        <editor content="{ page.content }">
+        </editor>
       </fieldset>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

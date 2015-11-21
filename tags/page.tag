@@ -56,11 +56,6 @@ require('editor.tag');
         <div class="form-group">
           <label class="col-sm-2 control-label" for="content">Content:</label>
           <div class="col-sm-10">
-            <textarea name="content"
-                      value="{ page.content }"
-                      class="col-md-12 form-control"
-                      rows="20">
-            </textarea>
             <editor content="{ page.content }">
             </editor>
           </div>

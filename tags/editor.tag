@@ -1,18 +1,10 @@
-var ProseMirror = require('prosemirror/dist/edit').ProseMirror
-require('prosemirror/dist/parse/markdown');
-require("prosemirror/dist/menu/menubar");
-
 <editor>
-  <div id="editor"></div>
+  <textarea name="content"
+            value="{ opts.content }"
+            class="col-md-12 form-control"
+            rows="20">
+  </textarea>
 
   <script>
-   this.on('mount', function() {
-     var editor = new ProseMirror({
-       place: this.root.querySelector("#editor"),
-       doc: opts.content,
-       docFormat: "markdown",
-       menuBar: true
-     });
-   });
   </script>
 </editor>

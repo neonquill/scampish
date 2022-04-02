@@ -7,4 +7,4 @@ actual rendering.
 See https://github.com/neonquill/s3-static-generator for the rendering
 code.
 
-License: http://unlicense.org/
+License: https://blueoakcouncil.org/license/1.0.0
